@@ -1,4 +1,4 @@
-import React, {FC, PropsWithChildren} from "react";
+import React, {FC} from "react";
 import {Link, LoaderFunctionArgs, Outlet, useLoaderData, useLocation} from "react-router-dom";
 import {fetchData} from "../../fetchUtils";
 
@@ -12,7 +12,7 @@ const navigation = [
     ["Statystyki", "/stats"],
 ]
 
-const CompetitionLayout: FC<PropsWithChildren<any>> = () => {
+const CompetitionLayout: FC = () => {
     const competition = useLoaderData()
     const location = useLocation()
 

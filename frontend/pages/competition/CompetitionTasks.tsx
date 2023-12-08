@@ -1,7 +1,7 @@
-import {useFetcher, useLoaderData, useLocation, useRevalidator} from "react-router-dom";
+import {useLoaderData, useRevalidator} from "react-router-dom";
 import CompetitionTaskCard from "../../components/competitionTasks/CompetitionTaskCard";
 import {fetchData, postData} from "../../fetchUtils";
-import {useRef, useState} from "react";
+import {useState} from "react";
 
 export const competitionTasksPageLoader = ({params}) => {
     return fetchData(`/api/competition-tasks/by_competition/?competition_slug=${params.competition_slug}`)

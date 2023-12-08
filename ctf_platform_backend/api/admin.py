@@ -1,8 +1,12 @@
 from django.contrib import admin
-from ctf_platform_backend.api.models import Competition, TaskCategory, CompetitionTask, \
-    CompetitionCompletedTask, CompetitionTeam, CompetitionTeamMember
-
-# Register your models here.
+from ctf_platform_backend.api.models import (
+    Competition,
+    TaskCategory,
+    CompetitionTask,
+    CompetitionCompletedTask,
+    CompetitionTeam,
+    CompetitionTeamMember,
+)
 
 models_to_register = [
     Competition,

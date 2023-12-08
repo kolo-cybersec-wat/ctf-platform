@@ -18,7 +18,7 @@ class Competition(models.Model):
     are_submissions_open = models.BooleanField()
 
     def __str__(self):
-        return f'Competition: {self.name}'
+        return f"Competition: {self.name}"
 
 
 class TaskCategory(models.Model):
@@ -37,7 +37,7 @@ class CompetitionTask(models.Model):
     flag = models.TextField()
 
     def __str__(self):
-        return f'Task: {self.title} - {self.competition.name}'
+        return f"Task: {self.title} - {self.competition.name}"
 
 
 class CompetitionTeam(models.Model):
@@ -50,8 +50,7 @@ class CompetitionTeam(models.Model):
     @staticmethod
     def get_from_competition_and_user(competition: Competition, user: User):
         return CompetitionTeam.objects.filter(
-            competition=competition,
-            members__exact=user
+            competition=competition, members__exact=user
         ).get()
 
 
@@ -62,8 +61,7 @@ class CompetitionTeamMember(models.Model):
     @staticmethod
     def get_from_competition_and_user(competition: Competition, user: User):
         return CompetitionTeamMember.objects.filter(
-            team__competition=competition,
-            user=user
+            team__competition=competition, user=user
         ).get()
 
 

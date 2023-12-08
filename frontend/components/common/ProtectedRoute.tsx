@@ -6,7 +6,7 @@ export const protectedRouteGroupLoader = () => {
 }
 
 const ProtectedRoute = () => {
-    const {is_authenticated, username} = useLoaderData()
+    const {is_authenticated} = useLoaderData()
     const {pathname} = useLocation()
 
     if(!is_authenticated)

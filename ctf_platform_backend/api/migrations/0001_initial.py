@@ -7,7 +7,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -16,71 +15,174 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Competition',
+            name="Competition",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.TextField(max_length=255)),
-                ('slug', models.SlugField(max_length=255)),
-                ('short_description', models.TextField()),
-                ('about', models.TextField()),
-                ('start_date', models.DateTimeField()),
-                ('end_date', models.DateTimeField()),
-                ('is_registration_active', models.BooleanField()),
-                ('are_tasks_visible', models.BooleanField()),
-                ('are_submissions_open', models.BooleanField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.TextField(max_length=255)),
+                ("slug", models.SlugField(max_length=255)),
+                ("short_description", models.TextField()),
+                ("about", models.TextField()),
+                ("start_date", models.DateTimeField()),
+                ("end_date", models.DateTimeField()),
+                ("is_registration_active", models.BooleanField()),
+                ("are_tasks_visible", models.BooleanField()),
+                ("are_submissions_open", models.BooleanField()),
             ],
         ),
         migrations.CreateModel(
-            name='CompetitionTeam',
+            name="CompetitionTeam",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('is_approved', models.BooleanField()),
-                ('competition', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.competition')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("is_approved", models.BooleanField()),
+                (
+                    "competition",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="api.competition",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='TaskCategory',
+            name="TaskCategory",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('slug', models.SlugField(max_length=255)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("slug", models.SlugField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='CompetitionTeamMember',
+            name="CompetitionTeamMember",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.competitionteam')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "team",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="api.competitionteam",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='competitionteam',
-            name='members',
-            field=models.ManyToManyField(through='api.CompetitionTeamMember', to=settings.AUTH_USER_MODEL),
+            model_name="competitionteam",
+            name="members",
+            field=models.ManyToManyField(
+                through="api.CompetitionTeamMember", to=settings.AUTH_USER_MODEL
+            ),
         ),
         migrations.CreateModel(
-            name='CompetitionTask',
+            name="CompetitionTask",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
-                ('description', models.TextField()),
-                ('attachments', django.contrib.postgres.fields.ArrayField(base_field=models.TextField(), size=None)),
-                ('points', models.FloatField()),
-                ('flag', models.TextField()),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.taskcategory')),
-                ('competition', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.competition')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("description", models.TextField()),
+                (
+                    "attachments",
+                    django.contrib.postgres.fields.ArrayField(
+                        base_field=models.TextField(), size=None
+                    ),
+                ),
+                ("points", models.FloatField()),
+                ("flag", models.TextField()),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="api.taskcategory",
+                    ),
+                ),
+                (
+                    "competition",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="api.competition",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='CompetitionCompletedTask',
+            name="CompetitionCompletedTask",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('completion_time', models.DateTimeField(auto_now_add=True)),
-                ('competition_team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.competitionteam')),
-                ('task', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.competitiontask')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("completion_time", models.DateTimeField(auto_now_add=True)),
+                (
+                    "competition_team",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="api.competitionteam",
+                    ),
+                ),
+                (
+                    "task",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="api.competitiontask",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

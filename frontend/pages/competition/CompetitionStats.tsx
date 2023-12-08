@@ -1,4 +1,3 @@
-import Markdown from "react-markdown";
 import React from "react";
 import {useLoaderData} from "react-router-dom";
 import CompetitionScoreboardChart from "../../components/competitionTasks/CompetitionScoreboardChart";

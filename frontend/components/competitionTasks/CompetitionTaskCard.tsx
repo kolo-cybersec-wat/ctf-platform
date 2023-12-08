@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Markdown from "react-markdown";
 
 import * as Dialog from '@radix-ui/react-dialog';
 import {Cross2Icon} from '@radix-ui/react-icons';
 import {CheckCircledIcon} from '@radix-ui/react-icons'
-import {useLocation, useNavigate} from "react-router-dom";
-import {postData} from "../../fetchUtils";
 
 const FlagModal = ({isOpen, taskPk, onClose, onFlagSubmit}) => {
     const handleSubmit = (e) => {

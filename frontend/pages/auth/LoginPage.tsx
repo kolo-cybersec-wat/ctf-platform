@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useEffect} from "react";
 import {postData} from "../../fetchUtils";
 import {useLocation, useNavigate} from "react-router-dom";
 
@@ -13,7 +13,7 @@ const LoginPage = () => {
             const next = query.get('next')
             navigate(next ? next : '/')
         }
-    }, [res]);
+    }, [res, location.search, navigate]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()

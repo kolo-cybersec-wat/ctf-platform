@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line no-undef
 module.exports = {
   content: [
     "./index.html",
@@ -7,6 +8,7 @@ module.exports = {
   theme: {
     extend: {},
   },
+  // eslint-disable-next-line no-undef
   plugins: [require('@tailwindcss/typography')],
 }
 

@@ -1,26 +1,20 @@
-from rest_framework import serializers, viewsets
+from rest_framework import serializers
 
 from ctf_platform_backend.api.models import Competition, CompetitionTask
 
 
-# Serializers define the API representation.
 class CompetitionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Competition
         fields = "__all__"
-        lookup_field = 'slug'
-        extra_kwargs = {
-            'url': {'lookup_field': 'slug'}
-        }
+        lookup_field = "slug"
+        extra_kwargs = {"url": {"lookup_field": "slug"}}
 
 
 class CompetitionTaskSerializer(serializers.HyperlinkedModelSerializer):
     is_completed = serializers.BooleanField()
 
-    category = serializers.SlugRelatedField(
-        read_only=True,
-        slug_field='name'
-    )
+    category = serializers.SlugRelatedField(read_only=True, slug_field="name")
 
     class Meta:
         model = CompetitionTask
@@ -31,7 +25,7 @@ class CompetitionTaskSerializer(serializers.HyperlinkedModelSerializer):
             "description",
             "attachments",
             "points",
-            "is_completed"
+            "is_completed",
         )
 
 
@@ -41,8 +35,8 @@ class SubmitFlagSerializer(serializers.Serializer):
 
     def validate(self, attrs):
         # Take username and password from request
-        flag = attrs.get('flag')
-        task_pk = attrs.get('task_pk')
+        flag = attrs.get("flag")
+        task_pk = attrs.get("task_pk")
 
         try:
             task = CompetitionTask.objects.get(pk=task_pk)

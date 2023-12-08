@@ -1,6 +1,5 @@
 import {
     createBrowserRouter, Outlet, RouteObject,
-    RouterProvider,
 } from "react-router-dom";
 
 import RootLayout, {rootLayoutLoader} from "./components/common/RootLayout";
