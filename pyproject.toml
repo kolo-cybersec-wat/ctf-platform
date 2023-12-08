@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "ctf-platform"
+version = "0.1.0"
+description = ""
+authors = ["Michał Oręziak <micorix.dev@gmail.com>"]
+readme = "README.md"
+packages = [{include = "ctf_platform_backend"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.7"
+psycopg2-binary = "^2.9.9"
+djangorestframework = "^3.14.0"
+django-filter = "^23.3"
+markdown = "^3.5.1"
+reactivated = "^0.32.1"
+django-cors-headers = "^4.3.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
