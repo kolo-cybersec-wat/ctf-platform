@@ -1,9 +1,10 @@
 import Cookies from "universal-cookie";
+import {environment} from "./environment";
 
 export const fetchData = (path: string, options: RequestInit = {}) => {
     options.headers = options.headers || {};
     options.headers['Accept'] = 'application/json';
-    return fetch(`${import.meta.env.VITE_BACKEND_URL}${path}`, options);
+    return fetch(`${environment.BACKEND_URL}${path}`, options);
 }
 
 // WARNING: urls MUST end with a slash

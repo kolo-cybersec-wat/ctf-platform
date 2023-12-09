@@ -4,14 +4,15 @@ services:
    app:
      build:
        context: .
-       dockerfile: Dockerfile
-     command: poetry run python manage.py runserver 0.0.0.0:8000
+       dockerfile: backend.Dockerfile
+     command: python manage.py runserver 0.0.0.0:8000
      restart: unless-stopped
      depends_on:
        - db
      volumes:
        - $PWD/ctf_platform_backend:/opt/ctf_platform_backend/ctf_platform_backend
-       - $PWD/client:/opt/ctf-platform-backend/client
+       - ./django-static:/opt/ctf-platform-backend/static-root
+       - ./media-static:/opt/ctf-platform-backend/media-root
      ports:
        - 8000:8000
      environment:
@@ -20,6 +21,11 @@ services:
        POSTGRES_HOST: postgres
        POSTGRES_PORT: 5432
        POSTGRES_DB: postgres
+       ALLOWED_HOSTS: "localhost"
+       CORS_ALLOWED_ORIGINS: "http://localhost:5173"
+       CSRF_TRUSTED_ORIGINS: "http://localhost:5173"
+       DEBUG: "True"
+       SECRET_KEY: "secret"
 
    db:
      image: postgres:13

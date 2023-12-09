@@ -3,7 +3,7 @@ import {useLoaderData} from "react-router-dom";
 import CompetitionScoreboardChart from "../../components/competitionTasks/CompetitionScoreboardChart";
 
 export const competitionStatsPageLoader = ({params}) => {
-    return fetch(`/api/competition-scoreboard?competition_slug=${params.competition_slug}`)
+    return fetch(`/api/competition-scoreboard?competition_slug=${params.competitionSlug}`)
 }
 
 const CompetitionStatsPage = () => {

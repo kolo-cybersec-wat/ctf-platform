@@ -7,7 +7,7 @@ export const competitionLayoutLoader = ({params}: LoaderFunctionArgs) => {
 }
 
 const navigation = [
-    ["O CTFie", "/"],
+    ["O CTFie", ""],
     ["Zadania", "/tasks"],
     ["Statystyki", "/stats"],
 ]

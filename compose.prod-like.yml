@@ -1,0 +1,52 @@
+# DO NOT USE IN PRODUCTION
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+    ports:
+      - 8080:80
+    environment:
+      BACKEND_URL: ""
+      NGINX_BACK_URL: "http://backend:8000"
+      NGINX_SERVER_NAME: "localhost"
+    depends_on:
+        - backend
+    volumes:
+      - ./django-static:/opt/django-static
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - 8000:8000
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: postgres
+      PYTHONPATH: "/opt/ctf_platform_backend"
+      ALLOWED_HOSTS: "localhost"
+      CORS_ALLOWED_ORIGINS: "http://localhost:8080"
+      CSRF_TRUSTED_ORIGINS: "http://localhost:8080"
+      DEBUG: "False"
+      SECRET_KEY: "secret"
+    volumes:
+      - ./django-static:/opt/ctf-platform-backend/static-root
+      - ./media-static:/opt/ctf-platform-backend/media-root
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432

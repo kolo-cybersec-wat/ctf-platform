@@ -98,10 +98,29 @@ const CompetitionTaskCard = ({task, onFlagSubmit}) => {
                     </div>
 
                 </div>
-                <div className="mt-3 pt-3 border-t prose max-w-full">
-                    <Markdown>
-                        {task.description}
-                    </Markdown>
+                <div className="mt-3 pt-3 border-t max-w-full">
+                    <div className="prose">
+                        <Markdown>
+                            {task.description}
+                        </Markdown>
+                    </div>
+                    {
+                        task.attachments && task.attachments.length && (
+                            <div className="mt-5 text-sm">
+                                <span className="">Załączniki:</span>
+                                <ul className="list-inside list-disc text-gray-400">
+                                    {
+                                        task.attachments.map(attachment => (
+                                            <li className="mt-2 leading-none">
+                                                <a href={`/media/${attachment}`} target="_blank" rel="noreferrer"
+                                                   className="text-blue-600 hover:underline">{attachment.split('/').at(-1)}</a>
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+                        )
+                    }
                 </div>
                 {
                     !isCompleted && (

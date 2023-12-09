@@ -4,7 +4,7 @@ import {fetchData, postData} from "../../fetchUtils";
 import {useState} from "react";
 
 export const competitionTasksPageLoader = ({params}) => {
-    return fetchData(`/api/competition-tasks/by_competition/?competition_slug=${params.competition_slug}`)
+    return fetchData(`/api/competition-tasks/by_competition/?competition_slug=${params.competitionSlug}`)
 }
 
 const CompetitionTasksPage = () => {
@@ -57,7 +57,7 @@ const CompetitionTasksPage = () => {
             </div>
             <div className="grid gap-y-5 pb-10">
                 {
-                    tasks.map(task => <CompetitionTaskCard task={task} onFlagSubmit={handleFlagSubmit} /> )
+                    tasks && tasks.map(task => <CompetitionTaskCard task={task} onFlagSubmit={handleFlagSubmit} /> )
                 }
             </div>
         </div>

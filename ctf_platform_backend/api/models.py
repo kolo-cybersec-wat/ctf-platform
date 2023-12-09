@@ -40,6 +40,20 @@ class CompetitionTask(models.Model):
         return f"Task: {self.title} - {self.competition.name}"
 
 
+def get_competition_task_file_location(instance, filename):
+    task_name = instance.task.title.lower().replace(" ", "-")
+    file_name = filename.lower().replace(" ", "-")
+    return "competition/{}/{}".format(task_name, file_name)
+
+
+class CompetitionTaskFile(models.Model):
+    task = models.ForeignKey(
+        CompetitionTask,
+        on_delete=models.CASCADE
+    )
+    file = models.FileField(upload_to=get_competition_task_file_location, null=True, blank=True)
+
+
 class CompetitionTeam(models.Model):
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)

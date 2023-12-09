@@ -22,6 +22,8 @@ COPY manage.py ./
 
 COPY static static
 
+COPY manage.py entrypoint.backend.sh ./
+
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["./entrypoint.backend.sh"]

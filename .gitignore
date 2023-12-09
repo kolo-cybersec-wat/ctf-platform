@@ -1,3 +1,7 @@
+media-static
+django-static
+postgres-data
+
 # IDE
 .idea
 

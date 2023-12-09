@@ -1,10 +1,10 @@
-import {Outlet, useLoaderData} from "react-router-dom";
+import {Link, Outlet, useLoaderData} from "react-router-dom";
 import React from "react";
-import {fetchData} from "../../fetchUtils";
+import {getSessionData} from "../../fetchUtils";
 import {PersonIcon} from "@radix-ui/react-icons";
 
 export const rootLayoutLoader = () => {
-    return fetchData('/api/auth/session/');
+    return getSessionData()
 }
 
 const RootLayout = () => {
@@ -23,14 +23,18 @@ const RootLayout = () => {
                                  by Koło CyberSecurity WCY WAT
                              </span>
                             </div>
-                            {session.is_authenticated && (
+                            {session.is_authenticated ? (
                                 <div className="flex items-center text-gray-500">
                                     <span>
                                         <PersonIcon className="w-4 h-4 mr-2" />
                                     </span>
                                     <span>{session.username}</span>
                                     <span className="mx-4 block h-7 w-[1px] bg-gray-400" />
-                                    <a href="/api/auth/logout/">Wyloguj się</a>
+                                    <Link to="/auth/logout/">Wyloguj się</Link>
+                                </div>
+                            ) : (
+                                <div className="flex items-center text-gray-500">
+                                    <Link to="/auth/login/">Zaloguj się</Link>
                                 </div>
                             )}
                         </div>

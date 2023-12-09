@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ctf_platform_backend.api.models import Competition, CompetitionTask
+from ctf_platform_backend.api.models import Competition, CompetitionTask, CompetitionTaskFile
 
 
 class CompetitionSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,6 +15,12 @@ class CompetitionTaskSerializer(serializers.HyperlinkedModelSerializer):
     is_completed = serializers.BooleanField()
 
     category = serializers.SlugRelatedField(read_only=True, slug_field="name")
+    attachments = serializers.SerializerMethodField()
+
+    def get_attachments(self, task: CompetitionTask):
+        return CompetitionTaskFile.objects.filter(
+            task=task
+        ).all().values_list("file", flat=True)
 
     class Meta:
         model = CompetitionTask

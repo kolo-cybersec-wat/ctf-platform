@@ -11,6 +11,7 @@ import CompetitionTasksPage, {competitionTasksPageLoader} from "./pages/competit
 import LoginPage from "./pages/auth/LoginPage";
 import ProtectedRoute, {protectedRouteGroupLoader} from "./components/common/ProtectedRoute";
 import CompetitionStatsPage, {competitionStatsPageLoader} from "./pages/competition/CompetitionStats";
+import LogoutPage, {logoutPageLoader} from "./pages/auth/Logout";
 
 const protectedRoutes: RouteObject[] = [
     {
@@ -65,6 +66,11 @@ export const routes: RouteObject[] = [
             {
                 path: "login",
                 element: <LoginPage/>
+            },
+            {
+                path: "logout",
+                loader: logoutPageLoader,
+                element: <LogoutPage/>
             }
         ],
     },
