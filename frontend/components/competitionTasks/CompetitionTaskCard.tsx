@@ -105,7 +105,7 @@ const CompetitionTaskCard = ({task, onFlagSubmit}) => {
                         </Markdown>
                     </div>
                     {
-                        task.attachments && task.attachments.length && (
+                        task.attachments && task.attachments.length > 0 && (
                             <div className="mt-5 text-sm">
                                 <span className="">Załączniki:</span>
                                 <ul className="list-inside list-disc text-gray-400">
