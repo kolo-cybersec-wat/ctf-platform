@@ -81,14 +81,15 @@ class SubmitFlagView(views.APIView):
             )
 
         task = CompetitionTask.objects.get(pk=serializer.validated_data["task_pk"])
-        completed_task = CompetitionCompletedTask.objects.create(
+        completed_task, created = CompetitionCompletedTask.objects.get_or_create(
             competition_team=CompetitionTeam.get_from_competition_and_user(
                 task.competition, request.user
             ),
             user=request.user,
             task=task,
         )
-        completed_task.save()
+        if created:
+            completed_task.save()
 
         return Response(
             {
