@@ -25,6 +25,9 @@ class TaskCategory(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
 
+    def __str__(self):
+        return f"Category: {self.name}"
+
 
 class CompetitionTask(models.Model):
     title = models.CharField(max_length=255)
@@ -53,6 +56,9 @@ class CompetitionTaskFile(models.Model):
     )
     file = models.FileField(upload_to=get_competition_task_file_location, null=True, blank=True)
 
+    def __str__(self):
+        return f"File: {self.file} - {self.task.title}"
+
 
 class CompetitionTeam(models.Model):
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
@@ -67,6 +73,9 @@ class CompetitionTeam(models.Model):
             competition=competition, members__exact=user
         ).get()
 
+    def __str__(self):
+        return f"Team: {self.name} - {self.competition.name}"
+
 
 class CompetitionTeamMember(models.Model):
     team = models.ForeignKey(CompetitionTeam, on_delete=models.CASCADE)
@@ -78,6 +87,9 @@ class CompetitionTeamMember(models.Model):
             team__competition=competition, user=user
         ).get()
 
+    def __str__(self):
+        return f"Team member: {self.user.username} - {self.team.name} - {self.team.competition.name}"
+
 
 class CompetitionCompletedTask(models.Model):
     competition_team = models.ForeignKey(CompetitionTeam, on_delete=models.CASCADE)
@@ -85,3 +97,6 @@ class CompetitionCompletedTask(models.Model):
     task = models.ForeignKey(CompetitionTask, on_delete=models.CASCADE)
 
     completion_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Completed task: {self.task.title} - {self.competition_team.name} - {self.competition_team.competition.name}"
