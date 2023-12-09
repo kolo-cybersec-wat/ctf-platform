@@ -134,11 +134,11 @@ const CompetitionTaskCard = ({task, onFlagSubmit}) => {
                 }
 
             </div>
-            <FlagModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onFlagSubmit={handleFlagSubmit}
-                taskPk={task.pk}/>
+            {/*<FlagModal*/}
+            {/*    isOpen={isModalOpen}*/}
+            {/*    onClose={() => setIsModalOpen(false)}*/}
+            {/*    onFlagSubmit={handleFlagSubmit}*/}
+            {/*    taskPk={task.pk}/>*/}
         </>
     )
 }

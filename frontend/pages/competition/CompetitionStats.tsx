@@ -19,6 +19,7 @@ const CompetitionStatsPage = () => {
                 <tr>
                     <th className=" text-left">Miejsce</th>
                     <th className="text-center">Nazwa</th>
+                    <th className="text-right">L. zadań</th>
                     <th className="text-right">Punkty</th>
                 </tr>
                 </thead>
@@ -28,6 +29,7 @@ const CompetitionStatsPage = () => {
                         <tr>
                             <td>{index + 1}</td>
                             <td className="text-center">{team.name}</td>
+                            <td className="text-right">{team.count}</td>
                             <td className="text-right">{team.total_score}</td>
                         </tr>
                     ))

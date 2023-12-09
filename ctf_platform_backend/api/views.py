@@ -1,4 +1,4 @@
-from django.db.models import OuterRef, Subquery, Sum
+from django.db.models import OuterRef, Subquery, Sum, F, Count
 from rest_framework import status, viewsets, views, permissions
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
@@ -67,6 +67,13 @@ class SubmitFlagView(views.APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, format=None):
+        return Response(
+            {
+                "success": False,
+            },
+            status=status.HTTP_403_FORBIDDEN,
+        )
+
         serializer = SubmitFlagSerializer(
             data=self.request.data, context={"request": self.request}
         )
