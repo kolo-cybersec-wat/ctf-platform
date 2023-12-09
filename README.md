@@ -5,14 +5,15 @@ Platform for handling submissions for Capture the Flag competitions organized by
 Technologies:
 * python >= 3.11
 * django
-* reactivated.io
-* react, typescript
+* vite, react, typescript
 * tailwind
 * docker
 
 ## Getting started
 
-`docker compose up --build --force-recreate`
+`docker compose up -f compose.local.yml --build --force-recreate`
+
+`docker compose up -f compose.prod-like.yml --build --force-recreate`
 
 
 ## Goals
@@ -21,14 +22,14 @@ Technologies:
 * Users can choose competition and register a team
 * Teams need to be approved
 * System can handle submissions and generate statistics
-* System have admin panel
+* System should have admin panel
 
 ## Current status
 
 - Competition
   - [x] Competitions list
   - [x] About competition view (markdown)
-  - [ ] **Admin can register teams**
+  - [x] **Admin can register teams**
   - [ ] Team self registration
   - [x] Submitting flags view
   - [x] Basic stats view
@@ -36,5 +37,5 @@ Technologies:
 - Registration
   - [x] Admin user can register other users
   - [ ] Self registration
-  - [ ] **Login**
+  - [x] **Login**
   - [ ] Password reset etc.
