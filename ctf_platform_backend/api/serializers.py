@@ -49,6 +49,10 @@ class SubmitFlagSerializer(serializers.Serializer):
 
             if flag != task.flag:
                 raise serializers.ValidationError("Flag is invalid")
+
+            if not task.competition.are_submissions_open:
+                raise serializers.ValidationError("Submissions are closed")
+
         except CompetitionTask.DoesNotExist:
             raise serializers.ValidationError("Task does not exist")
 

@@ -10,8 +10,16 @@ class Command(BaseCommand):
     help = 'Import users and tasks from CSV and TOML files'
 
     def add_arguments(self, parser):
-        parser.add_argument('users_file', type=str, help='Path to the CSV file with users')
-        parser.add_argument('tasks_file', type=str, help='Path to the TOML file with tasks')
+        parser.add_argument(
+            '--users-file',
+            type=str,
+            help='Path to the CSV file with users'
+        )
+        parser.add_argument(
+            '--tasks-file',
+            type=str,
+            help='Path to the TOML file with tasks'
+        )
 
     def _add_contestants(self, users_file_path):
         # Import users from CSV
@@ -53,11 +61,11 @@ class Command(BaseCommand):
 
     def _add_tasks(self, tasks_file_path):
         competition, created = Competition.objects.get_or_create(
-            slug="ctf-1",
-            name="Studenckie zawody CTF",
+            slug="ctf-2",
+            name="Capture the Flag 2.0",
             short_description="Zawody CTF dla studentów",
-            start_date="2021-12-09 08:30",
-            end_date="2021-12-09 12:30",
+            start_date="2025-03-08 08:30",
+            end_date="2025-03-08 12:30",
             is_registration_active=True,
             are_tasks_visible=True,
             are_submissions_open=True
@@ -100,10 +108,13 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.SUCCESS(f'Task {title} {"created" if created else "already exists"}'))
 
     def handle(self, *args, **options):
-        users_file_path = options['users_file']
-        tasks_file_path = options['tasks_file']
+        users_file_path =  options.get('users_file')
+        tasks_file_path = options.get('tasks_file')
 
-        self._add_tasks(tasks_file_path)
-        self._add_contestants(users_file_path)
+        if tasks_file_path:
+            self._add_tasks(tasks_file_path)
 
-        self.stdout.write(self.style.SUCCESS('Data import completed'))
+        if users_file_path:
+            self._add_contestants(users_file_path)
+
+        self.stdout.write(self.style.SUCCESS('Data import completedd'))

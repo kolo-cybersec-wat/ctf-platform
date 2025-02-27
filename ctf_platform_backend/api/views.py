@@ -33,16 +33,16 @@ class CompetitionTasksViewSet(viewsets.ModelViewSet):
         competition_slug = request.query_params.get("competition_slug", None)
         competition = get_object_or_404(Competition, slug=competition_slug)
 
-        user_team_member = None
+        user_team = None
 
         try:
             user_team_member = CompetitionTeamMember.objects.filter(
                 user=request.user, team__competition=competition
             ).get()
+            user_team = user_team_member.team
         except CompetitionTeamMember.DoesNotExist:
-            return Response(status=status.HTTP_403_FORBIDDEN)
-
-        user_team = user_team_member.team
+            if not request.user.is_staff:
+                return Response(status=status.HTTP_403_FORBIDDEN)
 
         completed_task_subquery = (
             CompetitionCompletedTask.objects.filter(
@@ -67,13 +67,6 @@ class SubmitFlagView(views.APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, format=None):
-        return Response(
-            {
-                "success": False,
-            },
-            status=status.HTTP_403_FORBIDDEN,
-        )
-
         serializer = SubmitFlagSerializer(
             data=self.request.data, context={"request": self.request}
         )
