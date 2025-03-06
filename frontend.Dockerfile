@@ -2,7 +2,13 @@ FROM node:20 as builder
 
 WORKDIR /opt/ctf-platform-frontend
 
+ENV PNPM_HOME="/pnpm"
+
+ENV PATH="$PNPM_HOME:$PATH"
+# https://github.com/pnpm/pnpm/issues/9029#issuecomment-2629817478
+RUN npm install -g corepack@0.31.0
 RUN corepack enable
+RUN corepack use pnpm@10.0.0
 
 COPY package.json pnpm-lock.yaml ./
 

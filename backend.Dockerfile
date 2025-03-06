@@ -26,4 +26,6 @@ COPY manage.py entrypoint.backend.sh ./
 
 EXPOSE 8000
 
-ENTRYPOINT ["./entrypoint.backend.sh"]
+ENTRYPOINT ["/bin/sh", "-c"]
+
+CMD ["sh ./entrypoint.backend.sh"]
