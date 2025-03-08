@@ -48,5 +48,5 @@ class Command(BaseCommand):
 
     def generate_random_password(self):
         # Generate a random password (you can customize this according to your needs)
-        characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?'
+        characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
         return ''.join(random.choice(characters) for i in range(12))

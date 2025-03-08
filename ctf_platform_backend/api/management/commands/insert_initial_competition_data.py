@@ -64,8 +64,8 @@ class Command(BaseCommand):
             slug="ctf-2",
             name="Capture the Flag 2.0",
             short_description="Zawody CTF dla studentów",
-            start_date="2025-03-08 08:30",
-            end_date="2025-03-08 12:30",
+            start_date="2025-03-08 09:50",
+            end_date="2025-03-08 13:15",
             is_registration_active=True,
             are_tasks_visible=True,
             are_submissions_open=True

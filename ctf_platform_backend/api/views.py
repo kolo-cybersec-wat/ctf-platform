@@ -52,11 +52,14 @@ class CompetitionTasksViewSet(viewsets.ModelViewSet):
             .values("pk")[:1]
         )
 
-        competition_tasks = (
-            self.queryset.filter(competition=competition)
-            .annotate(is_completed=Subquery(completed_task_subquery))
-            .all()
-        )
+        competition_tasks = []
+
+        if competition.are_tasks_visible:
+            competition_tasks = (
+                self.queryset.filter(competition=competition)
+                .annotate(is_completed=Subquery(completed_task_subquery))
+                .all()
+            )
 
         serializer = self.get_serializer(competition_tasks, many=True)
         return Response(serializer.data)
